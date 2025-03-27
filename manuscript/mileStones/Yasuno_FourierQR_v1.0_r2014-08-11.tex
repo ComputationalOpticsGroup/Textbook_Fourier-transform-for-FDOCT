@@ -1,0 +1,273 @@
+\documentclass{article}[10pt,a4paper]
+\usepackage{xspace,amssymb, times}
+%\newcommand{\ft}[1]{\mathfrak{F}\left[#1\right]\xspace}
+\newcommand{\ft}[1]{\mathcal{F}\left[{#1}\right]\xspace}
+\newcommand{\ift}[1]{\mathcal{F}^{-1}\left[{#1}\right]\xspace}
+\newcommand{\sexp}[1]{e^{#1}\xspace}
+\newcommand{\intinfty}{\int^{+\infty}_{-\infty}\xspace}
+\newcommand{\abs}[1]{\left|{#1}\right|\xspace}
+
+\newcommand{\ftf}[1]{{\mathcal{F}\left[#1\right]\xspace}}
+\newcommand{\iftf}[1]{{\mathcal{F}^{-1}\left[#1\right]\xspace}}
+\newcommand{\ftt}[1]{{\tilde{#1}\xspace}}
+\newcommand{\comb}[1]{{\mathrm{comb}\left( #1 \right)}\xspace}
+\newcommand{\Dz}{{\Delta z}\xspace}
+\newcommand{\Dk}{{\Delta k}\xspace}
+\newcommand{\cst}[1]{{\mathrm{#1}}\xspace}
+
+
+\title{Quick Reference of Fourier Transform for Fourier Domain Optical
+Coherence Tomography}
+
+\author{Yoshiaki Yasuno}
+\date{2014-08-11}
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Introduction}
+This short note aims at providing a quick reference of Fourier transform, its basic rules, and some typical Fourier transform pairs.
+Among several such textbooks, this short note is characterized by its focus toward Fourier domain optical coherence tomography (FD-OCT).
+
+\section{Notations}
+In this short note, the following notations are utilized.
+
+$\lambda$ denotes wavelength and its unit is typically m in SI system.
+
+$k$ is an {\em angular} wavenumber. $k = 2\pi/\lambda$.
+In the formulation of FD-OCT, a variable of spectral domain is typically
+$k$.
+
+$\kappa$ is an {\em oscillation} wavenumber; $\kappa = k/2\pi =
+1/\lambda$. $\kappa$ is rarely used in formulation of FD-OCT.
+
+$z$ is a {\em double-path} axial optical depth, and is the Fourier pair
+of $k$.
+The single path physical depth is then represented as $z/2n$ with $n$ as a refractive index.
+
+\section{Definition of Fourier transform}
+
+\subsubsection*{Fourier transform}
+\noindent
+The Fourier transform that transforms a function of $z$ to its $k$
+spectrum is defines as follows.
+\begin{equation}
+ \tilde{f}(k) = \ft{f(z)} = \intinfty f(z) \sexp{-ikz} dz,
+\end{equation}
+where $\ft{\quad}$ represents Fourier transform.
+
+\subsubsection*{Inverse Fourier transform}
+%\noindent
+%\textbf{Inverse Fourier transform}\\
+The inverse Fourier transform ($k$ to $z$) is defined as
+\begin{equation}
+ f(z) = \ift{\tilde{f}(k)} = \frac{1}{2 \pi} \tilde{f}(k) \sexp{ikz} dk,
+\end{equation}
+where $\ft{\quad}$ represents inverse Fourier transform.
+$1/2\pi$ is a constant to make the Fourier transform and the inverse
+Fourier transform as a reversible pair.
+
+\section{Convolution and convolution theorem}
+\subsubsection*{Convolution}
+The convolution of two functions $f(z)$ and $g(z)$ is defines as
+\begin{equation}
+ f(z)*g(z) \equiv \intinfty f(z') g(z-z') dz',
+\end{equation}
+where $*$ denotes convolution.
+
+\subsubsection*{$z$-domain convolution theory}
+The Fourier transform of convolution of functions in $z$ becomes a
+multiplication of the Fourier transformations of these functions.
+\begin{equation}
+ \ft{f(z)*g(z)} = \tilde{f}(k) \tilde{g}(k).
+\end{equation}
+Similarly,
+\begin{equation}
+ \ift{\tilde{f}(k)*\tilde{g}(k)} = f(z)*g(z).
+\end{equation}
+This relationship is known as convolution theory.
+
+\subsubsection*{$k$-domain convolution theory}
+The convolution theory of the convolution of $k$ domain functions is
+\begin{equation}
+ \ift{\tilde{f}*(k)*\tilde{g}(k)} = 2\pi f(z)g(z).
+\end{equation}
+Similarly,
+\begin{equation}
+ \ft{f(z)g(z)} = \frac{1}{2\pi} \tilde{f}(k) *\tilde{g}(k).
+\end{equation}
+
+\subsubsection*{Multiple-convolution and associative law of convolution}
+By sequentially applying convolution theory, it can be extended into
+three or more functions as
+\begin{equation}
+ \ft{\left\{f(z)*g(z)\right\}*h(z)} 
+  = \ft{f(z)*g(z)} \tilde{h}(k) 
+  = \tilde{f}(k) \tilde{g}(k) \tilde{h}(k).
+\end{equation}
+It implies the associative rule of the convolution
+\begin{equation}
+ \left[f(z)*g(z)\right]*h(z) = f(z)*\left[g(z)*h(z)\right]
+\end{equation}
+
+Similarly, the $k$-domain convolution theory of three functions becomes
+\begin{equation}
+ \ift{\left\{\tilde{f}(k) * \tilde{g}(k) \right\}*\tilde{h}(k)} 
+  = \frac{1}{2\pi}\ift{\tilde{f}(k)* \tilde{g}(k)} {h}(z) 
+  = \frac{1}{(2\pi)^2} f(z) g(z) h(z).
+\end{equation}
+Note that, for multiple convolution of $n$ functions, the coefficient in
+the right hand side of the equation becomes $1/(2 \pi)^{(n-1)}$.
+
+The associative law of convolution of $k$-domain function is the same
+with that of $z$-domain function as
+\begin{equation}
+ \left[\tilde{f}(k)*\tilde{g}(k)\right]*\tilde{h}(k) =
+  \tilde{f}(k)*\left[\tilde{g}(k)*\tilde{h}(k)\right].
+\end{equation}
+
+\subsubsection*{Commutative law of convolution}
+The commutative law stands for convolution as
+\begin{equation}
+ f(z)*g(z) = g(z) * f(z),
+\end{equation}
+and 
+\begin{equation}
+ \tilde{f}(k)* \tilde{g}(k) = \tilde{g}(k)* \tilde{f}(k).
+\end{equation}
+
+\section{Delta-function and shift law}
+\subsubsection*{Delta-function and its Fourier transform}
+The Fourier transform of a delta-function is a complex harmonic
+function whose frequency is defined by the position of the delta
+function;
+\begin{equation}
+ \ft{\delta(z-z_0)} = \sexp{-i k z_0}
+  \quad \Leftrightarrow \quad
+  \ift{\sexp{-ikz_0}} = \delta(z-z_0).
+\end{equation}
+Similarly, for $k$-domain delta function
+\begin{equation}
+ \ift{\delta(k-k_0)} = \frac{1}{2\pi} \sexp{i k_0 z}
+  \quad \Leftrightarrow \quad
+  \ft{\sexp{ik_0 z}} = 2\pi \delta(k-k_0).
+\end{equation}
+
+\subsubsection*{Shift law of Fourier transform}
+By using the convolution theorem and the Fourier transform of
+delta-function, the Fourier transform of a shifted function can be
+obtained as
+\begin{eqnarray}
+ \ft{ f(z) * \delta(z-z_0)} = \tilde{f}(k) \sexp{-ikz_0}
+\end{eqnarray}
+Its $k$-domain version is
+\begin{equation}
+ \ift{\tilde{f}(k) * \delta(k-k_0)} = f(z) \sexp{ik_0 z}
+\end{equation}
+
+Shift law indicates that if the signal is shifted, a linear phase slope is
+added to its spectrum.
+Similarly, if the spectrum of a function is shifted, a linear phase
+slope is added to the function.
+
+\section{Auto-correlation and Wiener-Khintchine's theorem}
+\subsubsection*{Cross- and auto-correlation functions}
+The cross-correlation function of two functions $f(z)$ and $g(z)$ is
+defines as
+\begin{equation}
+ f(z) \otimes g(z) \equiv \intinfty f(z')g(z'-z) dz',
+\end{equation}
+where $\otimes$ represents correlation.
+
+The correlation function between a same function is called as
+auto-correlation, and is defined as
+\begin{equation}
+ f(z) \otimes f(z) \equiv \intinfty f(z')f(z'-z) dz'.
+\end{equation}
+
+\subsubsection*{Wiener-Khintchine's theorem}
+The inverse Fourier transform of the power spectrum of a function is the
+auto-correlation of the function;
+\begin{equation}
+ \ift{ \abs{\tilde{f}(k)}^2} = f(z) \otimes f(z).
+\end{equation}
+This relation between the power spectrum and the auto-correlation is
+known as Wiener-Khintchine's theorem.
+
+\section{Scaling and mirroring of a signal}
+\subsubsection*{Scaling property of Fourier transform}
+The Fourier transform of a signal scaled in $z$ is
+\begin{equation}
+ \ft{f(az)} = \frac{1}{\abs{a}} \tilde{f}\left(\frac{k}{a}\right).
+\end{equation}
+Similarly,
+\begin{equation}
+ \ift{\tilde{f}(bk)} = \frac{1}{\abs{b}}f\left(\frac{z}{b}\right),
+\end{equation}
+where $a$ and $b$ are scaling factors.
+
+\subsubsection*{Fourier transform of a mirrored signal}
+The Fourier transform of a mirrored signal is obtained as
+\begin{equation}
+ \ft{f(-z)} = \tilde{f}(-k)
+  \quad \Leftrightarrow \quad
+  \ift{\tilde{f}(-k)} = f(-z).
+\end{equation}
+This is a special case of the scaling property with a scaling factor of
+-1.
+
+\section{Fourier transform of  real function and complex conjugate}
+\subsubsection*{Fourier transform of real function}
+The Fourier transform spectrum of a real function $r(z)$ is a
+mirror-conjugate-symmetric function;
+\begin{equation}
+ \tilde{r}(k) = \tilde{r^*}(-k)
+\end{equation}
+where $\tilde{r}(k) = \ft{r(z)}$ and $r(z)$ is a real function.
+
+Similarly, for a real spectrum $\tilde{s}(k)$,
+\begin{equation}
+ s(z) = s^*(-z)
+\end{equation}
+where $s(k) = \ift{\tilde{s}(k)}$ and $s(k)$ is a real function.
+
+This relation is exemplified by FD-OCT.
+A spectral interferogram is a real function, and hence its Fourier
+transform in $z$-domain is mirror-conjugate-symmetric.
+(Note that it does not true if additional phase is applied to the
+spectral interferogram, as it is frequently done to correct dispersion.)
+
+\subsubsection*{Fourier transform of complex conjugate}
+The Fourier transform of the complex conjugate of a function becomes a
+mirrored complex conjugate of the original spectrum;
+\begin{equation}
+ \ft{f^*(z)} = \tilde{f}^*(-k),
+\end{equation}
+where superscript of $*$ denotes complex conjugate.
+Similarly,
+\begin{equation}
+ \ift{\tilde{f}^*(k)} = f^*(-z).
+\end{equation}
+
+This relationship can be derived by resolving $f(z)$ into two real
+functions as $f_r(z) + i f_i'(z)$, Fourier transform it, and then
+applying the rule for the Fourier transform of a real function.
+
+\section{Parseval's theorem}
+Parseval's theorem is the law of energy conservation during Fourier
+transform.
+\begin{equation}
+ \intinfty \abs{f(z)}^2 dz = \frac{1}{2\pi}
+  \intinfty{\abs{\tilde{f}(k)}^2} dk
+\end{equation}
+
+%\section{Poisson's formula and comb function}
+%\begin{equation}
+% \mathrm{I\!I\!I}(k)
+%\end{equation}
+
+%\section{Window functions and is Fourier transform}
+%\subsubsection*{Gauss function}
+%\subsubsection*{Hanning function}
+%\subsubsection*{Hamming function}
+\end{document}
