@@ -77,6 +77,30 @@ The inverse Fourier transform from the $k$ domain to the $z$ domain is defined a
 where $\ftf{\quad}$ represents inverse Fourier transform.
 $1/2 \pi$ is a constant to make the Fourier transform and the inverse Fourier transform as a reversible pair.
 
+\subsection{Euler's formula and cos-sin-form of Fourier transform}
+Euler's formula can decompose exponential function into cosine and sine functions as
+\begin{equation}
+	e^{i\theta} = \cos \theta + i \sin\theta,
+\end{equation}
+and
+\begin{equation}
+	e^{-i\theta} = \cos \theta - i \sin\theta,
+\end{equation}
+where $\theta$ is a phase value or function.
+
+Using Euler's formula, the Fourier and the inverse Fourier transforms can be written in the cos-and-sin form as
+\begin{equation}
+	\ftt{f}(k) = \int^{+\infty}_{-\infty} f(z) e^{-ikz}dz =
+	 \int^{+\infty}_{-\infty} f(z) \cos(kz) \,\, dz
+	-i\int^{+\infty}_{-\infty} f(z) \sin(kz) \,\, dz,
+\end{equation}
+and
+\begin{equation}
+	f(z) = \frac{1}{2\pi} \int^{+\infty}_{-\infty} \ftt{f}(k) e^{ikz} dk =
+	\frac{1}{2\pi} \left[\int^{+\infty}_{-\infty} \ftt{f}(k) \cos(kz) dk
+	+i \int^{+\infty}_{-\infty} \ftt{f}(k) \sin(kz) dk\right].
+\end{equation}
+
 \section{Convolution and convolution theorem}
 \subsection{Convolution}
 The convolution of two functions $f(z)$ and $g(z)$ is defines as
@@ -138,32 +162,47 @@ and
 \end{equation}
 
 \section{Delta-function and shift law}
-\subsection{Delta-function and its Fourier transform}
+\subsection{Delta function and its Fourier transform}
+The Dirac delta function, or ``delta function'' in short, is defined as
+\begin{equation}
+	\delta\left( x \right) =
+	\left\{
+		\begin{array}{ccl}
+			0& \mathrm{for} & x \neq 0\\
+			+\infty& \mathrm{for} & x = 0	
+		\end{array}
+	\right.,
+\end{equation}
+where $x$ is a general variable, and
+\begin{equation}
+	\intinfty \delta\left( x \right)\,\, dx = 1.
+\end{equation}
+
 The Fourier transform of a delta-function is a complex harmonic function whose frequency is defined by the position of the delta function as
 \begin{equation}
-	\ftf{\delta\left(z-\mathrm{z_0}\right)} = e^{-i \mathrm{z_0} k}
+	\ftf{\delta\left(z-\mathrm{z_1}\right)} = e^{-i \mathrm{z_1} k}
 	\qquad\Leftrightarrow\qquad	
-	\iftf{e^{-i \mathrm{z_0} k}} = \delta\left(z-\mathrm{z_0}\right),
+	\iftf{e^{-i \mathrm{z_1} k}} = \delta\left(z-\mathrm{z_1}\right),
 \end{equation}
-where $\mathrm{z_0}$ is a constant representing the position of the $z$-domain delta function.
+where $\mathrm{z_1}$ is a constant representing the position of the $z$-domain delta function.
 
 Similarly, for $k$-domain delta function
 \begin{equation}
 	\label{eq:deltaK}
-	\iftf{\delta\left(k-\mathrm{k_0}\right)} = \frac{1}{2\pi} e^{i \mathrm{k_0} z}
+	\iftf{\delta\left(k-\mathrm{k_1}\right)} = \frac{1}{2\pi} e^{i \mathrm{k_1} z}
 	\qquad\Leftrightarrow\qquad
-	\ftf{e^{i \mathrm{k_0} z}} = 2\pi\delta\left(k-\mathrm{k_0}\right),
+	\ftf{e^{i \mathrm{k_1} z}} = 2\pi\delta\left(k-\mathrm{k_1}\right),
 \end{equation}
-where $\mathrm{k_0}$ is a constant representing the position of the $k$-domain delta function.
+where $\mathrm{k_1}$ is a constant representing the position of the $k$-domain delta function.
 
 \subsection{Shift law of Fourier transform}
-By using the convolution theorem and the Fourier transform of delta-function, the Fourier transform of a shifted function can be obtained as
+By using the convolution theorem and the Fourier transform of delta-function, the Fourier transform of a shifted function can be obtained as	
 \begin{equation}
-	\ftf{ f(z) * \delta\left(z-\mathrm{z_0}\right)} = \ftt{f}(k) e^{-i \mathrm{z_0} k}
+	\ftf{ f(z) * \delta\left(z-\mathrm{z_1}\right)} = \ftt{f}(k) e^{-i \mathrm{z_1} k}
 \end{equation}
 Its $k$-domain version is
 \begin{equation}
-	\iftf{\ftt{f}(k)* \delta\left(k- \mathrm{k_0}\right)} = f(z) e^{i \mathrm{k_0} z}.
+	\iftf{\ftt{f}(k)* \delta\left(k- \mathrm{k_1}\right)} = f(z) e^{i \mathrm{k_1} z}.
 \end{equation}
 Shift law indicates that if the signal is shifted, a linear phase slope is added to its spectrum.
 Similarly, if the spectrum of a function is shifted, a linear phase slope is added to the function.
@@ -202,6 +241,10 @@ By using Poisson summation formula, the comb-function can be expressed in its di
 The Fourier transform of a comb-function [Eq.\@ (\ref{eq:ftCombZ})] can be derived by using this distributional form and the formula of the Fourier transform of delta-function [Eq.\@ (\ref{eq:deltaK})].
 
 \section{Auto-correlation and Wiener-Khintchine’s theorem}
+{\bf NOTE!:}
+This section may be inconsistent for complex functions, and may consist some errors.
+Don't blindly trust this section.
+The material will be corrected soon.
 \subsection{Cross- and auto-correlation functions}
 The cross-correlation function of two functions $f(z)$ and $g(z)$ is defines as
 \begin{equation}
@@ -212,6 +255,16 @@ where $\otimes$ represents correlation.
 The correlation function between a same function is called as auto-correlation, and is written as
 \begin{equation}
 	f(z) \otimes f(z)  = \int_{-\infty}^{+\infty} f(z') f(z'-z)\, dz'.
+\end{equation}
+
+The correlation and convolution are related as 
+\begin{equation}
+	f(z) \otimes g(z) = f(z) * g(-z).
+\end{equation}
+This can be proven using $g'(z) \equiv g(-z)$ as
+\begin{equation}
+	f(z) \otimes g(z) = \int_{-\infty}^{+\infty} f(z') g(z'-z)\, dz'
+	= \int_{-\infty}^{+\infty} f(z') g'(z-z')\, dz' = f(z) * g(-z).
 \end{equation}
 
 % YAS: Clarify the relationship between the correlation function and convolution here.
@@ -311,8 +364,9 @@ The following topics are going to be added.
 
 \section*{Release log}
 \begin{itemize}
-\item 2014-08-21 (Thu): [Ver1.0] The first pre-view release by Yasuno.
-\item 2015-06-02 (Tue): [Ver1.1] ``Comb function'' was added by Yasuno.
+\item 2025-04-15 (Tue): [ver1.3pre01] Dirac delta function and sin-and-cos form of Fourier transform are added by Yasuno.
 \item 2025-03-27 (Thu): [Ver1.2pre01] Reformatted and several interpretations of equations added by Yasuno.
+\item 2015-06-02 (Tue): [Ver1.1] ``Comb function'' was added by Yasuno.	
+\item 2014-08-21 (Thu): [Ver1.0] The first pre-view release by Yasuno.
 \end{itemize}
 \end{document}
